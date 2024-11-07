@@ -445,7 +445,7 @@
 
 }
 
-@media (min-width : 600px) and (max-width : 1000px) {
+/* @media (min-width : 600px) and (max-width : 1000px) {
     .page_404 {
         padding: 40px 0;
         background: #fff;
@@ -494,7 +494,7 @@
 }
 
 /* Mobile Version */
-
+/* 
 @media (min-width : 200px) and (max-width : 600px) {
     .crsr {
         display: none;
@@ -542,7 +542,7 @@
     }
 
     nav .name {
-        /* background-color: cyan; */
+        /* background-color: cyan;
         width: 50%;
         height: 100%;
         display: flex;
@@ -784,4 +784,4 @@
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
     }
-}
+} */ 

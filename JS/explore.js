@@ -1,43 +1,75 @@
-function loco() {
-	gsap.registerPlugin(ScrollTrigger);
-
-	// Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
-
-	const locoScroll = new LocomotiveScroll({
-		el: document.querySelector(".main"),
-		smooth: true
-	});
-	// each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
-	locoScroll.on("scroll", ScrollTrigger.update);
-
-	// tell ScrollTrigger to use these proxy methods for the ".main" element since Locomotive Scroll is hijacking things
-	ScrollTrigger.scrollerProxy(".main", {
-		scrollTop(value) {
-			return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-		}, // we don't have to define a scrollLeft because we're only scrolling vertically.
-		getBoundingClientRect() {
-			return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-		},
-		// LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-		pinType: document.querySelector(".main").style.transform ? "transform" : "fixed"
-	});
-
-	// each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
-	ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-
-	// after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-	ScrollTrigger.refresh();
-
-}
-loco();
-
-Shery.textAnimate("#envi_head", {
+Shery.textAnimate(".header", {
 	style: 2,
 	y: 10,
 	delay: 0.2,
 	duration: 2,
 	ease: "cubic-bezier(0.23, 1, 0.320, 1)",
 	multiplier: 0.1,
+});
+
+// Initialize a new Lenis instance for smooth scrolling
+const lenis = new Lenis();
+
+
+// Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+lenis.on('scroll', ScrollTrigger.update);
+
+// Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+// This ensures Lenis's smooth scroll animation updates on each GSAP tick
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+});
+
+// Disable lag smoothing in GSAP to prevent any delay in scroll animations
+gsap.ticker.lagSmoothing(0);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+	const mobileMenu = document.getElementById('mobileMenu');
+	const menuOpen = document.getElementById('menuOpen');
+	const menuClose = document.getElementById('menuClose');
+
+	// Initial state
+	menuOpen.classList.remove('hidden');
+	menuClose.classList.add('hidden');
+	mobileMenu.classList.add('hidden');
+
+	// Toggle menu function
+	window.toggleMenu = function () {
+		if (mobileMenu.classList.contains('hidden')) {
+			// Opening menu
+			mobileMenu.classList.remove('hidden');
+			menuOpen.classList.add('hidden');
+			menuClose.classList.remove('hidden');
+
+			// Animation for opening
+			gsap.fromTo(mobileMenu, {
+				opacity: 0,
+				y: -20
+			}, {
+				opacity: 1,
+				y: 0,
+				duration: 0.8,
+				ease: "power2.out"
+			});
+		} else {
+			// Closing menu
+			gsap.to(mobileMenu, {
+				opacity: 0,
+				y: -20,
+				duration: 0.8,
+				ease: "power2.in",
+				onComplete: () => {
+					mobileMenu.classList.add('hidden');
+					menuOpen.classList.remove('hidden');
+					menuClose.classList.add('hidden');
+				}
+			});
+		}
+	};
+
+	// Add click event listener to menuClose button
+	menuClose.addEventListener('click', toggleMenu);
 });
 
 Shery.imageMasker("#wcon3", {
@@ -84,6 +116,19 @@ Shery.imageMasker("#our_env", {
 	duration: 2,
 });
 
+Shery.mouseFollower({
+	//Parameters are optional.
+	skew: true,
+	ease: "cubic-bezier(0.23, 1, 0.320, 1)",
+	duration: 1
+});
+
+// Shery.makeMagnet(".btn", {
+//     ease: "cubic-bezier(0.23, 1, 0.320, 1)",
+//     duration: 1
+// });
+
+
 Shery.makeMagnet("img", {
 	ease: "cubic-bezier(0.23, 1, 0.320, 1)",
 	duration: 1,
@@ -114,12 +159,10 @@ function menuclick() {
 	sliding.style.transitionProperty = "all ";
 };
 
-var crsr = document.querySelector(".pc .crsr");
-document.addEventListener("mousemove", function (dets) {
-	crsr.style.left = dets.x + 25 + "px";
-	crsr.style.top = dets.y + 25 + "px";
-});
 
+function menu() {
+
+}
 
 
 

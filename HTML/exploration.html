@@ -5,49 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aayushchouhan24/sheryjs@main/dist/Shery.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/explore.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../IMAGES/LOGO.png" alt="SciFiScience Logo" height="40">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse bg-dark py-4 vh-100 position-fixed top-0 start-0 w-100" id="navbarNav" style="z-index: 1000;">
-                <div class="container h-100 d-flex flex-column justify-content-center align-items-center">
-                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="collapse" data-bs-target="#navbarNav" aria-label="Close"></button>
-                    <ul class="navbar-nav text-center mb-4">
-                        <li class="nav-item dropdown mb-3">
-                            <a class="nav-link dropdown-toggle text-white py-2" href="#" data-bs-toggle="dropdown">Environment</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item py-2" href="#water-conservation">Water Conservation</a></li>
-                                <li><a class="dropdown-item py-2" href="#global-warming">Global Warming</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item mb-3">
-                            <a class="nav-link text-white py-2" href="./maintainance.html">Quiz</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex mb-4 w-75">
-                        <div class="input-group">
-                            <input class="form-control py-2" type="search" placeholder="Search here">
-                            <button class="btn btn-outline-light px-4" type="submit">
-                                <i class="ri-search-line"></i>
-                            </button>
+    <nav class="fixed top-0 w-full bg-white shadow-lg z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="flex items-center">
+                    <img src="../IMAGES/LOGO.png" alt="SciFiScience Logo" class="h-12">
+                </a>
+                <!-- Menu toggle buttons -->
+                <div class="lg:hidden">
+                    <button id="menuOpen" onclick="toggleMenu()" class="block">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-16 6h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Mobile menu -->
+                <div id="mobileMenu"
+                    class="fixed inset-0 bg-gray-900 bg-opacity-95 hidden lg:relative lg:flex lg:bg-transparent transform transition-transform duration-300">
+                    <button id="menuClose" onclick="toggleMenu()" class="absolute top-6 right-6 text-white z-50 hidden">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div
+                        class="container mx-auto h-full flex flex-col justify-center items-center lg:flex-row lg:justify-end lg:space-x-12">
+                        <ul class="flex flex-col text-center mb-6 lg:flex-row lg:mb-0 lg:space-x-10">
+                            <li class="relative group mb-4 lg:mb-0">
+                                <a class="text-white lg:text-gray-900 text-lg font-medium py-2 hover:text-blue-600 transition duration-300"
+                                    href="#" onclick="toggleSubmenu()">Environment</a>
+                                <ul id="environmentSubmenu"
+                                    class="hidden lg:group-hover:block absolute left-0 bg-white shadow-xl rounded-md mt-2 w-48">
+                                    <li><a class="block px-5 py-3 text-gray-900 hover:bg-gray-50 text-base"
+                                            href="#water-conservation">Water Conservation</a></li>
+                                    <li><a class="block px-5 py-3 text-gray-900 hover:bg-gray-50 text-base"
+                                            href="#global-warming">Global Warming</a></li>
+                                </ul>
+                            </li>
+                            <li class="mb-4 lg:mb-0">
+                                <a class="text-white lg:text-gray-900 text-lg font-medium py-2 hover:text-blue-600 transition duration-300"
+                                    href="./maintainance.html">Quiz</a>
+                            </li>
+                        </ul>
+                        <form class="w-3/4 mb-6 lg:w-auto lg:mb-0">
+                            <div class="flex">
+                                <input
+                                    class="w-full px-5 py-2.5 rounded-l-md border-2 border-gray-200 focus:outline-none focus:border-blue-500 text-base"
+                                    type="search" placeholder="Search here">
+                                <button
+                                    class="px-6 py-2.5 bg-gray-50 border-2 border-gray-200 text-gray-900 rounded-r-md hover:bg-blue-500 hover:text-white hover:border-blue-500 transition duration-300">
+                                    <i class="ri-search-line text-lg"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="flex space-x-5">
+                            <a href="./sign_up.html"
+                                class="px-7 py-2.5 border-2 border-blue-500 text-blue-500 text-base font-medium rounded-md hover:bg-blue-500 hover:text-white transition duration-300">Sign
+                                Up</a>
+                            <a href="./sign_in.html"
+                                class="px-7 py-2.5 bg-blue-500 text-white text-base font-medium rounded-md hover:bg-blue-600 transition duration-300">Sign
+                                In</a>
                         </div>
-                    </form>
-                    <div class="d-flex">
-                        <a href="./sign_up.html" class="btn btn-outline-light me-3 px-4 py-2">Sign Up</a>
-                        <a href="./sign_in.html" class="btn btn-primary px-4 py-2">Sign In</a>
                     </div>
                 </div>
             </div>
@@ -55,25 +82,29 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container-fluid p-0">
-        <header class="py-5 text-center bg-light mt-5">
-            <h1 class="display-4">Explore & Learn From SciFiScience</h1>
+    <div class="w-full">
+        <header class="py-8 md:py-16 text-center bg-gray-100 mt-16">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl header font-bold px-4">Explore & Learn From SciFiScience</h1>
         </header>
 
         <!-- Environment Section -->
-        <section id="environment" class="py-5">
-            <div class="container">
-                <h2 class="text-center mb-5">1. Environment</h2>
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <img src="../IMAGES/environment_1.jpg" alt="Environment" class="img-fluid rounded mb-4">
+        <section id="environment" class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">1. Environment</h2>
+                <div class="flex flex-wrap items-center -mx-4">
+                    <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                        <img src="../IMAGES/environment_1.jpg" alt="Environment" class="rounded-lg w-full">
                     </div>
-                    <div class="col-lg-6">
-                        <h3>About Environment</h3>
-                        <p class="lead">The environment encompasses the natural world that sustains life on Earth. It includes the air we breathe, the water we drink, the diverse ecosystems, and the delicate balance of nature.</p>
-                        <p>Preserving and protecting our environment is crucial for the well-being of all living organisms, including humans.</p>
-                        <a href="./maintainance.html" class="btn btn-primary">
-                            Explore More <i class="ri-arrow-right-line"></i>
+                    <div class="w-full lg:w-1/2 px-4">
+                        <h3 class="text-2xl font-bold mb-4">About Environment</h3>
+                        <p class="text-xl mb-4">The environment encompasses the natural world that sustains life on
+                            Earth. It includes the air we breathe, the water we drink, the diverse ecosystems, and the
+                            delicate balance of nature.</p>
+                        <p class="mb-6">Preserving and protecting our environment is crucial for the well-being of all
+                            living organisms, including humans.</p>
+                        <a href="./maintainance.html"
+                            class="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                            Explore More <i class="ri-arrow-right-line ml-2"></i>
                         </a>
                     </div>
                 </div>
@@ -81,39 +112,45 @@
         </section>
 
         <!-- Water Conservation Section -->
-        <section id="water-conservation" class="py-5 bg-light">
-            <div class="container">
-                <h2 class="text-center mb-5">2. Water Conservation</h2>
-                <div class="row align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <img src="../IMAGES/wcon_1.jpg" alt="Water Conservation" class="img-fluid rounded mb-4">
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <h3>About Water Conservation</h3>
-                        <p class="lead">Water conservation is crucial for our planet's sustainability. Every drop counts in preserving this precious resource for future generations.</p>
-                        <p>Through mindful usage and modern conservation techniques, we can make a significant impact in protecting our water resources.</p>
-                        <a href="./maintainance.html" class="btn btn-primary">
-                            Explore More <i class="ri-arrow-right-line"></i>
+        <section id="water-conservation" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">2. Water Conservation</h2>
+                <div class="flex flex-wrap items-center -mx-4">
+                    <div class="w-full lg:w-1/2 order-2 lg:order-1 px-4">
+                        <h3 class="text-2xl font-bold mb-4">About Water Conservation</h3>
+                        <p class="text-xl mb-4">Water conservation is crucial for our planet's sustainability. Every
+                            drop counts in preserving this precious resource for future generations.</p>
+                        <p class="mb-6">Through mindful usage and modern conservation techniques, we can make a
+                            significant impact in protecting our water resources.</p>
+                        <a href="./maintainance.html"
+                            class="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                            Explore More <i class="ri-arrow-right-line ml-2"></i>
                         </a>
+                    </div>
+                    <div class="w-full lg:w-1/2 order-1 lg:order-2 px-4 mb-8 lg:mb-0">
+                        <img src="../IMAGES/wcon_1.jpg" alt="Water Conservation" class="rounded-lg w-full">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Global Warming Section -->
-        <section id="global-warming" class="py-5">
-            <div class="container">
-                <h2 class="text-center mb-5">3. Global Warming</h2>
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <img src="../IMAGES/gb_main_middle_img.jpg" alt="Global Warming" class="img-fluid rounded mb-4">
+        <section id="global-warming" class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">3. Global Warming</h2>
+                <div class="flex flex-wrap items-center -mx-4">
+                    <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                        <img src="../IMAGES/gb_main_middle_img.jpg" alt="Global Warming" class="rounded-lg w-full">
                     </div>
-                    <div class="col-lg-6">
-                        <h3>About Global Warming</h3>
-                        <p class="lead">Global warming is one of the most pressing environmental challenges of our time. It affects ecosystems, weather patterns, and human societies worldwide.</p>
-                        <p>Understanding and addressing this issue is crucial for protecting our planet's future.</p>
-                        <a href="./maintainance.html" class="btn btn-primary">
-                            Explore More <i class="ri-arrow-right-line"></i>
+                    <div class="w-full lg:w-1/2 px-4">
+                        <h3 class="text-2xl font-bold mb-4">About Global Warming</h3>
+                        <p class="text-xl mb-4">Global warming is one of the most pressing environmental challenges of
+                            our time. It affects ecosystems, weather patterns, and human societies worldwide.</p>
+                        <p class="mb-6">Understanding and addressing this issue is crucial for protecting our planet's
+                            future.</p>
+                        <a href="./maintainance.html"
+                            class="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                            Explore More <i class="ri-arrow-right-line ml-2"></i>
                         </a>
                     </div>
                 </div>
@@ -122,45 +159,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/sheryjs/dist/Shery.js"></script>
     <script src="../JS/explore.js"></script>
-    <script>
-        // Get menu elements
-        const navbarToggler = document.querySelector('.navbar-toggler');
-        const navbarCollapse = document.querySelector('.navbar-collapse');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const isClickInside = navbarCollapse.contains(e.target) || navbarToggler.contains(e.target);
-            
-            if (!isClickInside && navbarCollapse.classList.contains('show')) {
-                navbarCollapse.classList.remove('show');
-            }
-        });
-
-        // Close menu when clicking nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navbarCollapse.classList.contains('show')) {
-                    navbarCollapse.classList.remove('show');
-                }
-            });
-        });
-
-        // Close menu when window resizes
-        window.addEventListener('resize', () => {
-            if (navbarCollapse.classList.contains('show')) {
-                navbarCollapse.classList.remove('show');
-            }
-        });
-    </script>
 </body>
 
 </html>
